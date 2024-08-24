@@ -1,0 +1,8 @@
+logs
+bodb server check 
+sm db server check
+api check
+first run script then monitor for 5 min and check with sm team if the same amount of tickets is showing
+then check kubernetes and check the count of tickets of each engineer
+then sheck the api using get multiple times
+kuch bar chal raha hai toh sm api ka issue hai

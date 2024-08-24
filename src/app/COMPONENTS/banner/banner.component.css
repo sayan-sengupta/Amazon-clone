@@ -1,0 +1,13 @@
+.banner_1{
+    width: 1263px;
+    /* mask-image: linear-gradient(rgba(0,0,0,1),rgba(0,0,0,0)); */
+    /* z-index: -1; */
+    /* margin-bottom: -400px;  */
+    /* // will comment out after doing the seller page */
+    
+    height: 400px;
+    background-position: center;
+    background-size: cover;
+    /* max-width: 100%; 
+    height: auto; */
+}

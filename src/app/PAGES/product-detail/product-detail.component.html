@@ -1,0 +1,37 @@
+<div routerLink="/home" class="back-btn" >
+    <button class="btn btn-warning"><i class="fa fa-solid fa-chevron-left"></i>&nbsp;&nbsp;Back</button>
+</div>
+
+
+<div class="container">
+    <div class="row product-detail">
+        <div class="col-sm-3">
+            <img class="product-image" src="{{productdata.images[0]}}"  alt="">
+
+            
+        </div>
+    
+
+
+    <div class="col-sm-8">
+        <div>
+            <h1>{{productdata.title}}</h1>
+            <p style="color: green;">Special Discount Price</p>
+            <h3>Price: $ {{productdata.price}}</h3>
+            <strong>Category:&nbsp;{{productdata.category}}</strong><br>
+            <strong>Description:</strong><br>
+            <p>{{productdata.description}}</p>
+            <p style="color: green;">Discount: {{productdata.discountPercentage}}%</p>
+            <strong>{{productdata.availabilityStatus}}</strong><br><br>
+            <!-- <h3>Reviews</h3>
+            <strong>{{productdata.reviews}}</strong> -->
+        </div>
+        <div>
+            <button class="btn btn-primary">Buy Now</button>&nbsp;
+            <button *ngIf="showadd" class="btn btn-warning" (click)="addtocart(productdata)">Add to Cart</button>
+            <button *ngIf="showremove" class="btn btn-danger" (click)="removeitem(productdata)">Remove Item</button>
+
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,48 @@
+<div class="header">
+    <nav class="header_top">
+      <div class="header_menu">
+        <div class="header_menu_icon">
+          <mat-icon>menu</mat-icon>
+  
+        </div>
+        <img src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" class="header_menu_logo" routerLink="/home">
+      <div class="header_menu_searchbar">
+        <input type="text" placeholder="Search Amazon.in" class="header_menu_input">
+        <div class="header_menu_searchbar_icon">
+          <mat-icon>search</mat-icon>
+  
+        </div>
+      </div>
+      <div class="header_menu_signin">
+        <span class="header_menu_top_item">Hello,Sign in</span>
+        <span class="header_menu_bottom_item">Accounts & List</span>
+  
+      </div>
+      <div class="header_menu_signin">
+        <span class="header_menu_top_item">Returns</span>
+        <span class="header_menu_bottom_item">& Orders</span>
+  
+      </div>
+      <div routerLink="/checkout" class="header_menu_cart">
+        <!-- <mat-icon>shopping_cart</mat-icon> -->
+         <i class="fa fa-shopping-cart" style="color: #febd69; font-size: 29px; cursor: pointer;">&nbsp;</i>
+        <p class="header_cart_number" style="cursor: pointer;">{{cartitems}}</p>
+      </div>
+      </div>
+    </nav>
+    <nav class="header_bottom">
+        <ul class="links">
+            <li><a routerLink="seller-auth">Become a Seller</a></li>
+            <li><a href="#">Today's Deals</a></li>
+            <li><a href="#">Customer Service</a></li>
+            <li><a href="#">Registry</a></li>
+            <li><a href="#">Gift Cards</a></li>
+            <li><a href="#">Sell</a></li>
+        </ul>
+      <div class="header_bottom_location_text">
+        <span class="header_left_line_one">Delivery to</span>
+        <span class="header_left_line_two"><strong>India</strong></span>
+  
+      </div>
+    </nav>
+  </div>

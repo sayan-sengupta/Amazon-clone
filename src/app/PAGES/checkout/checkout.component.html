@@ -1,0 +1,60 @@
+<ng-contianer *ngIf="showproduct.length != 0">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-9">
+        <h3>Shopping Cart</h3>
+        <table class="table mt-3">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Brand</th>
+              <th scope="col">Category</th>
+              <th scope="col">Price</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of showproduct">
+              <td>
+                <img style="width: 120px" src="{{ item.thumbnail }}" alt="" />
+              </td>
+              <td>{{ item.title }}</td>
+              <td>{{ item.category }}</td>
+              <td>{{ item.price }}</td>
+              <td>
+                <button (click)="deleteitem(item)" class="btn btn-danger">
+                  <i class="fa fa-minus" aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm-3">
+        <h1>Total Amount:</h1>
+        <strong style="font-size: 35px; color: rgb(239, 186, 13)"
+          >$ {{totalamount}}</strong><br>
+        <div class="btn-group mt-3">
+          <button class="btn btn-warning">Proceed to Buy</button>&nbsp;
+          <!-- <button class="btn btn-secondary">Empty Cart</button>&nbsp; -->
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-contianer>
+
+<ng-container *ngIf="showproduct.length == 0">
+  <div class="card">
+    <div class="card-img">
+      <img
+        src="https://m.media-amazon.com/images/G/31/cart/empty/kettle-desaturated._CB424694257_.svg"
+        alt=""
+      />
+    </div>
+    <div class="card-text">
+      <h3>Your Amazon Cart is empty</h3>
+      <h5>Please add items</h5>
+      <button routerLink="/home" class="btn btn-link">Show now</button>
+    </div>
+  </div>
+</ng-container>
