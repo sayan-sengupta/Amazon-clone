@@ -6,6 +6,8 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA ,NO_ERRORS_SCHEMA}  from '@angular/core';
+import {ReactiveFormsModule, Validators} from '@angular/forms';
+
 
 
 
@@ -28,6 +30,8 @@ import { NgbCarouselModule } from "@ng-bootstrap/ng-bootstrap";
 import { RegisterComponent } from './PAGES/register/register.component';
 import { ProfileComponent } from './PAGES/profile/profile.component';
 import { CategoryComponent } from './PAGES/category/category.component';
+import { SearchComponent } from './PAGES/search/search.component';
+import { PaymentSuccessComponent } from './PAGES/payment-success/payment-success.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,9 @@ import { CategoryComponent } from './PAGES/category/category.component';
     ProductDetailComponent,
     RegisterComponent,
     ProfileComponent,
-    CategoryComponent
+    CategoryComponent,
+    SearchComponent,
+    PaymentSuccessComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,8 @@ import { CategoryComponent } from './PAGES/category/category.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    ReactiveFormsModule
   
     
   ],

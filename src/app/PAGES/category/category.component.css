@@ -1,0 +1,8 @@
+.font-weight-normal{
+    cursor: pointer;
+    color: white;
+    background-color: rgb(189, 21, 21);
+    border-radius: 5px;
+    width: 50px;
+    font-size: 12px;
+}

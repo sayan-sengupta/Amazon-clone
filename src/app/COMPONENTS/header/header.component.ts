@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { product } from 'src/app/PAGES/home/productmodal';
 import { ApiService } from 'src/app/shared/api.service';
 
 @Component({
@@ -8,12 +10,48 @@ import { ApiService } from 'src/app/shared/api.service';
 })
 export class HeaderComponent implements OnInit {
   public cartitems:number=0;
-  constructor(private api:ApiService) { }
+  searchRes:any=[];
+  showsuggestions: boolean=false;
+  constructor(private api:ApiService,private route:Router) { }
 
   ngOnInit(): void {
-    this.api.products().subscribe(res=>{
+    // this.api.products().subscribe(res=>{
+    //   this.cartitems=res.length;
+    // })
+    this.api.getCartItems().subscribe(res=>{
       this.cartitems=res.length;
     })
   }
+  searchproduct(query:KeyboardEvent){
+    if(query){
+      const el=query.target as HTMLInputElement;
+      const val=el.value.trim();
+      if(val){}
+      this.api.searchproducts(el.value).subscribe((res)=>{
+        console.log(res);//display based on what we typed
+        // res.length=5; not working this is for limiting search
+        this.searchRes=res["products"];
+        console.log(this.searchRes)
+        this.showsuggestions=true;
+      
+      });
+    }
+      else{
+        this.searchRes=[];
+        this.showsuggestions=false
+      }
+    
+  
 
+  }
+  hidesearch(){
+    
+    setTimeout(()=>this.showsuggestions=false,200);
+  }
+  submitsearch(value:string){
+    // console.log(value)
+    this.route.navigate([`search/${value}`])
+  }
+  
+  
 }

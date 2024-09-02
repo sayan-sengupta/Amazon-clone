@@ -13,12 +13,12 @@ export class CategoryComponent implements OnInit {
   data: any;
   productdetails;
   product:void;
-  subcategory:any;
   getprod:any;
+  cart: { [key: string]: number } = {};
   constructor(private api:ApiService,private route:Router,private http:HttpClient) { }
 
   ngOnInit(): void {
-    this.displayproducts();
+    // this.displayproducts();
     // this.popularproducts();
     this.product = this.api.productCategory;
  
@@ -31,7 +31,8 @@ export class CategoryComponent implements OnInit {
       this.productdetails = data['products']
       console.log(this.productdetails, "finall")
     }
-    )}
+    )
+  }
   prevslide(){}
   nextslide(){}
   // popularproducts() {
@@ -42,18 +43,25 @@ export class CategoryComponent implements OnInit {
 
   //   })
   // }
-  displayproducts(){
-    this.api.getproduct().subscribe((res:any)=>{
-      this.data=res;
-       //console.log(res)       
-      //  console.log(this.data)
+  // displayproducts(){
+  //   this.api.getproduct().subscribe((res:any)=>{
+  //     this.data=res;
+  //      //console.log(res)       
+  //     //  console.log(this.data)
 
-    })
-  }
+  //   })
+  // }
 
-  addtocart(item:product){
+  // addtocart(item:product){
+  //   this.api.addtocart(item);
+
+  // }
+  addcart(item:product){
+    if (!this.cart[item.id]) {
+      this.cart[item.id] = 1;
+    }
+    console.log(item);
     this.api.addtocart(item);
-
   }
 
   removeitem(item:product){

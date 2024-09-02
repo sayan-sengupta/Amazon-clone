@@ -17,19 +17,20 @@
         <div>
             <h1>{{productdata.title}}</h1>
             <p style="color: green;">Special Discount Price</p>
-            <h3>Price: $ {{productdata.price}}</h3>
+            <h3><strong>Price:<strike> ₹{{productdata.price*83|number:'1.2-2'}}</strike></strong></h3>
+            <h3><strong>Discounted Price: ₹{{(productdata.price-(productdata.price*(productdata.discountPercentage/100)))*83|number:'1.2-2'}}</strong></h3>
             <strong>Category:&nbsp;{{productdata.category}}</strong><br>
             <strong>Description:</strong><br>
             <p>{{productdata.description}}</p>
-            <p style="color: green;">Discount: {{productdata.discountPercentage}}%</p>
+            <p style="color: white; background-color: #e60808; border-radius: 5px;width: 110px;padding-left: 2px;">Discount: {{productdata.discountPercentage}}%</p>
             <strong>{{productdata.availabilityStatus}}</strong><br><br>
             <!-- <h3>Reviews</h3>
             <strong>{{productdata.reviews}}</strong> -->
         </div>
         <div>
-            <button class="btn btn-primary">Buy Now</button>&nbsp;
-            <button *ngIf="showadd" class="btn btn-warning" (click)="addtocart(productdata)">Add to Cart</button>
-            <button *ngIf="showremove" class="btn btn-danger" (click)="removeitem(productdata)">Remove Item</button>
+            <button class="btn btn-primary" (click)="buynow()" style="background: #ffa41c; border-color: #ffa41c; color: black;">Buy Now</button>&nbsp;
+            <button *ngIf="showadd"  class="btn btn-warning" (click)="addtocart(productdata)" routerLink="/checkout" style="background: #ffd814; border-color: #ffd814;">Add to Cart</button>
+            <button *ngIf="showremove" class="btn btn-danger"  (click)="removeitem(productdata)">Remove Item</button>
 
         </div>
     </div>

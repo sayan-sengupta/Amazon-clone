@@ -7,6 +7,8 @@ import { SellerAuthComponent } from './PAGES/seller-auth/seller-auth.component';
 import { ProductDetailComponent } from './PAGES/product-detail/product-detail.component';
 import { RegisterComponent } from './PAGES/register/register.component';
 import { CategoryComponent } from './PAGES/category/category.component';
+import { SearchComponent } from './PAGES/search/search.component';
+import { PaymentSuccessComponent } from './PAGES/payment-success/payment-success.component';
 
 
 const routes: Routes = [
@@ -17,10 +19,9 @@ const routes: Routes = [
   {path:'checkout', component: CheckoutComponent},
   {path:'seller-auth', component: SellerAuthComponent},
   {path:'register', component: RegisterComponent},
-  {path:'category', component: CategoryComponent}
-
-
-
+  {path:'category', component: CategoryComponent},
+  {path:'search/:query', component: SearchComponent},
+  { path: 'pay-suc', component: PaymentSuccessComponent },
 ];
 
 @NgModule({

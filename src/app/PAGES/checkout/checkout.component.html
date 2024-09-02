@@ -10,7 +10,10 @@
               <th scope="col">Brand</th>
               <th scope="col">Category</th>
               <th scope="col">Price</th>
-              <th scope="col">Action</th>
+              <th scope="col">Quantity</th>
+              <!-- <th scope="col">Actions</th> -->
+
+
             </tr>
           </thead>
           <tbody>
@@ -20,12 +23,18 @@
               </td>
               <td>{{ item.title }}</td>
               <td>{{ item.category }}</td>
-              <td>{{ item.price }}</td>
+              <td>{{ (item.price*item.quantity)*83 | currency:'INR' }}</td>
+              
               <td>
-                <button (click)="deleteitem(item)" class="btn btn-danger">
+                <button (click)="decrease(item)" class="btn btn-danger">
                   <i class="fa fa-minus" aria-hidden="true"></i>
                 </button>
+                <span>{{ item.quantity ||0 }}</span>
+                <button (click)="increase(item)" class="btn btn-danger">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
               </td>
+              <!-- <td>{{ item.quantity || 0 }}</td> -->
             </tr>
           </tbody>
         </table>
@@ -33,9 +42,11 @@
       <div class="col-sm-3">
         <h1>Total Amount:</h1>
         <strong style="font-size: 35px; color: rgb(239, 186, 13)"
-          >$ {{totalamount}}</strong><br>
+          >INR {{totalamount*83|number:'1.2-2'}}</strong><br>
         <div class="btn-group mt-3">
-          <button class="btn btn-warning">Proceed to Buy</button>&nbsp;
+          <button (click)="buynow()" class="btn btn-warning" style="background: #ffd814; border-color: #ffd814;">Proceed to Buy</button>&nbsp;
+          <!-- <button (click)="emptycart()" class="btn btn-warning" style="background: #ffd814; border-color: #ffd814;">empty</button>&nbsp; -->
+
           <!-- <button class="btn btn-secondary">Empty Cart</button>&nbsp; -->
         </div>
       </div>

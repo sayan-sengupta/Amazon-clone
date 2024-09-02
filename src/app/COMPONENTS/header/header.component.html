@@ -7,18 +7,35 @@
         </div>
         <img src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" class="header_menu_logo" routerLink="/home">
       <div class="header_menu_searchbar">
-        <input type="text" placeholder="Search Amazon.in" class="header_menu_input">
-        <div class="header_menu_searchbar_icon">
-          <mat-icon>search</mat-icon>
-  
+        <input type="text"
+          #searchinput
+         (keyup)="searchproduct($event)"  placeholder="Search Amazon.in" class="header_menu_input">
+        <div  class="header_menu_searchbar_icon">
+          <!-- <mat-icon >search</mat-icon> -->
+          <button  (click)="submitsearch(searchinput.value)" class="btn btn-warning"><i  class="fa fa-search"></i></button>
+          
         </div>
       </div>
-      <div class="header_menu_signin">
+      <div class="suggested-result" *ngIf="showsuggestions && searchRes.length>0" >
+        <div *ngFor="let item of searchRes">
+          <div class="card" routerLink="/product-detail/{{item.id}}">
+            <div class="card-image" >
+              <img src="{{item.thumbnail}}" style="height: 50px; width: 50px;">
+            </div>
+            <div class="title" >
+                 <a class="nav-link" alt="{{item.title}}">
+                   {{item.title}} </a>
+            </div>
+          </div>
+          <!-- <a>{{item.title}}</a> -->
+        </div>
+      </div>
+      <div class="header_menu_signin" routerLink="/login" style="cursor: pointer;">
         <span class="header_menu_top_item">Hello,Sign in</span>
         <span class="header_menu_bottom_item">Accounts & List</span>
   
       </div>
-      <div class="header_menu_signin">
+      <div class="header_menu_signin" routerLink="/checkout" style="cursor: pointer;">
         <span class="header_menu_top_item">Returns</span>
         <span class="header_menu_bottom_item">& Orders</span>
   
