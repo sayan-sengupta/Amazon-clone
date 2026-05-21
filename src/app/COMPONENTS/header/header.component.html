@@ -16,7 +16,7 @@
           
         </div>
       </div>
-      <div class="suggested-result" *ngIf="showsuggestions && searchRes.length>0" >
+      <div class="suggested-result" *ngIf="showsuggestions || searchRes.length>0" >
         <div *ngFor="let item of searchRes">
           <div class="card" routerLink="/product-detail/{{item.id}}">
             <div class="card-image" >
@@ -30,7 +30,11 @@
           <!-- <a>{{item.title}}</a> -->
         </div>
       </div>
-      <div class="header_menu_signin" routerLink="/login" style="cursor: pointer;">
+      <div class="header_menu_signin" *ngIf="userName" (click)="logout()" style="cursor: pointer;">
+        <span class="header_menu_top_item">Hello, <strong style="font-size: 14px;">{{userName}}</strong></span>
+        <span class="header_menu_bottom_item">Logout</span>
+      </div>
+      <div class="header_menu_signin" *ngIf="!userName"  routerLink="/login" style="cursor: pointer;">
         <span class="header_menu_top_item">Hello,Sign in</span>
         <span class="header_menu_bottom_item">Accounts & List</span>
   

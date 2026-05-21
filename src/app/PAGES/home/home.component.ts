@@ -18,14 +18,15 @@ export class HomeComponent implements OnInit {
   // data!:product[]//!is used for any data type
   data:any|product[]=[];
   cart: { [key: string]: number } = {};
-  
+  tokenexist:any;
   // popularproducts_arr:any|product[];
   constructor(private api:ApiService,private route:Router,private http:HttpClient) { }
 
   ngOnInit(): void {
     this.displayproducts();
     this.initializeCarousel();
-    
+    window.scrollTo(0,0);
+    this.tokenexist=localStorage.getItem('token');
   }
   
   prevslide(){}
@@ -51,26 +52,26 @@ export class HomeComponent implements OnInit {
     console.log(item);
     this.api.addtocart(item);
   }
-  increase(item:product){
-    if (this.cart[item.id]) {
-      this.cart[item.id] += 1; // Increase quantity
-    } else {
-      this.cart[item.id] = 1; // Add to cart if not present
-    }
-    console.log(this.cart);
-    console.log(item)
-    this.api.addtocart(item);
+  // increase(item:product){
+  //   if (this.cart[item.id]) {
+  //     this.cart[item.id] += 1; // Increase quantity of the product
+  //   } else {
+  //     this.cart[item.id] = 1; // adding to cart if not present
+  //   }
+  //   console.log(this.cart);
+  //   console.log(item)
+  //   this.api.addtocart(item);
 
-  }
-  decrease(item:product){
-    if (this.cart[item.id] && this.cart[item.id] > 1) {
-      this.cart[item.id] -= 1; // Decrease quantity
-    } else {
-      delete this.cart[item.id]; // Remove item if quantity is 0
-    }
-    console.log(this.cart);
+  // }
+  // decrease(item:product){
+  //   if (this.cart[item.id] && this.cart[item.id] > 1) {
+  //     this.cart[item.id] -= 1; // Decrease quantity
+  //   } else {
+  //     delete this.cart[item.id]; // Remove item if quantity is 0
+  //   }
+  //   console.log(this.cart);
     
-  }
+  // }
 
   removeitem(item:product){
     this.api.removeitems(item);

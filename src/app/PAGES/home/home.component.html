@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div>
     <div
         id="carouselExampleFade"
@@ -104,7 +105,6 @@
 								<div class="card-img">
 									<img src="https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/1.png" class="img-fluid">
 								</div>
-								<!-- <div class="card-img-overlay">Eyeshadow Palette</div> -->
                 <div class="card-img-caption">Eyeshadow Palette</div>
 
 							</div>
@@ -116,7 +116,6 @@
 								<div class="card-img">
 									<img src="https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/3.png" class="img-fluid">
 								</div>
-								<!-- <div class="card-img-overlay">Calvin Klein</div> -->
                 <div class="card-img-caption">Calvin Klein</div>
 							</div>
 						</div>
@@ -127,7 +126,6 @@
 								<div class="card-img">
 									<img src="https://cdn.dummyjson.com/products/images/beauty/Powder%20Canister/1.png" class="img-fluid">
 								</div>
-								<!-- <div class="card-img-overlay">Powder Canister</div> -->
                 <div class="card-img-caption">Powder Canister</div>
 
 							</div>
@@ -139,7 +137,6 @@
 								<div class="card-img">
 									<img src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png" class="img-fluid">
 								</div>
-								<!-- <div class="card-img-overlay">Essence Mascara</div> -->
                 <div class="card-img-caption">Essence Mascara</div>
 
 							</div>
@@ -151,7 +148,6 @@
 								<div class="card-img">
 									<img src="https://cdn.dummyjson.com/products/images/fragrances/Dolce%20Shine%20Eau%20de/2.png" class="img-fluid">
 								</div>
-								<!-- <div class="card-img-overlay">Dolce Shine</div> -->
                 <div class="card-img-caption">Dolce Shine</div>
 
 							</div>
@@ -163,9 +159,7 @@
 								<div class="card-img">
 									<img src="https://cdn.dummyjson.com/products/images/fragrances/Gucci%20Bloom%20Eau%20de/2.png" class="img-fluid">
 								</div>
-								<!-- <div class="card-img-overlay">Gucci Bloom</div> -->
                 <div class="card-img-caption">Gucci Bloom</div>
-
 							</div>
 						</div>
 					</div>
@@ -386,9 +380,10 @@
                             <h3 routerLink="/product-detail/{{item.id}}" class="mb-0 font-weight-normal">{{item.discountPercentage}}%</h3>
                             <h3 routerLink="/product-detail/{{item.id}}" class="mb-0 fw-semibold" style="color: rgb(189, 21, 21) ; font-size: 11px; margin-left: 14px;">Limited Time Deal</h3>
                         </div>
-                        <h3 routerLink="/product-detail/{{item.id}}" class="mb-0 font-weight-semibold" style="cursor: pointer;"><strike>₹{{item.price*83|number:'1.0-0'}}</strike>&nbsp;&nbsp;₹{{(item.price-(item.price*(item.discountPercentage/100)))*83|number:'1.0-0'}}</h3>
+                        <h3 routerLink="/product-detail/{{item.id}}" class="mb-0 font-weight-semibold" style="cursor: pointer;"><strike>₹{{item.price*83|number:'1.0-0'}}</strike>&nbsp;&nbsp;<span style="font-size: 17px;">₹{{(item.price-(item.price*(item.discountPercentage/100)))*83|number:'1.0-0'}}</span></h3>
                         <!-- <button routerLink="/product-detail/{{item.id}}" class="btn btn-sm btn-dark mt-2"><i class="fa fa-solid fa-info mr-2"></i>&nbsp;&nbsp;View Details</button> -->
-                        <button  (click)="addcart(item)" routerLink="/checkout" class="btn btn-sm btn-warning mt-2 mb-2"><i class="fa fa-shopping-cart mr-2"></i>&nbsp;Add to Cart &nbsp;</button>
+                        <button  (click)="addcart(item)" *ngIf="tokenexist" routerLink="/checkout" class="btn btn-sm btn-warning mt-2 mb-2"><i class="fa fa-shopping-cart mr-2"></i>&nbsp;Add to Cart &nbsp;</button>
+                        <button *ngIf="!tokenexist" routerLink="/login" class="btn btn-sm btn-warning mt-2 mb-2"><i class="fa fa-shopping-cart mr-2"></i>&nbsp;Add to Cart &nbsp;</button>
                         <!-- <div *ngIf="cart[item.id]" class="content">
                           <button class="btn btn-warning decrease-btn" (click)="decrease(item)"><i class="fa fa-minus"></i></button>
                           <span>{{ cart[item.id] || 1 }}</span>
@@ -404,3 +399,4 @@
     </div>
 </div> 
 
+<app-footer></app-footer>

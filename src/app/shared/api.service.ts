@@ -40,78 +40,45 @@ export class ApiService {
     let currentCart = this.cartItems.getValue();
     const existingProductIndex = currentCart.findIndex(item => item.id === data.id);
 
-    if (existingProductIndex !== -1) {
-        // Product already in cart, update the quantity
-        currentCart[existingProductIndex].quantity += data.quantity || 1; // Use 1 if data.quantity is undefined
+    if (existingProductIndex !== -1) {// if Product already in cart quantity will increase
+        currentCart[existingProductIndex].quantity += data.quantity || 1; 
     } else {
-        // New product, add to cart with initial quantity
-        const newProduct = {
+        const newProduct = {//else if new product, add to cart with initial quantity
             ...data,
-            quantity: data.quantity || 1 // Default quantity to 1 if not defined
+            quantity: data.quantity || 1 
         };
         currentCart.push(newProduct);
     }
 
     this.cartItems.next(currentCart);
     console.log('Updated cart:', currentCart);
-    // const existingProduct = this.cartitemList.find(({ id }) => id === data.id
-    //   // p => p.id === product.id
-    // );
- 
-    // if (existingProduct) {
-    //   existingProduct.quantity += 1;
-    //   existingProduct.total = existingProduct.quantity * existingProduct.price;
- 
-    //   // this.cartItemList.push(existingProduct);
- 
- 
-    // } else {
-    //   const newProduct = {
-    //     ...data,
-    //     quantity: 1,
-    //     total: data.price
-    //   };
-    //   this.cartitemList.push(newProduct);
-    // }
-    // console.log("productlist",this.productList);
-    // this.productList.next(this.cartitemList);
-    // console.log("cartitemlist", this.cartitemList);
     
-    // this.cartitemList.push(data);
-    // this.productList.next(this.cartitemList);
-    // console.log(this.cartitemList)
   }
 
   products(){
     return this.productList.asObservable(); 
   }
+  
 
-  removeitems(data:product){
-    let currentCart = this.cartItems.getValue();
-    const index = currentCart.findIndex(i => i.id === data.id);
-    if (index !== -1) {
-      currentCart.splice(index, 1);
-      this.cartItems.next(currentCart);
+  removeitems(data:product){//for removing the product as whole
+    let currentCart = this.cartItems.getValue();//first its getting the value whats in the cartitems
+    const index = currentCart.findIndex(i => i.id === data.id);//its getting the index as the id of which product is being added
+    if (index !== -1) {//checking if the product exists and not = -1 because the products id starts from id 0
+      currentCart.splice(index, 1);//its saying at postion index remove 1 item 
+      this.cartItems.next(currentCart);//current cart item in currentcart 
     }
     console.log('Removed from cart:', data);
-    // this.cartitemList.map((a:product,index:product)=>{
-    //   console.log(index)
-    //   if(data.id===a.id){
-    //     this.cartitemList.splice(index,1);
-    //     console.log(this.cartitemList)
-    //   }
-    // })
-    // this.productList.next(this.cartitemList)
+  }
 
+  getCartItems(): Observable<product[]> {//this will be called to display the produst in the cart
+    return this.cartItems$;//return items the cart
   }
-  getCartItems(): Observable<product[]> {
-    return this.cartItems$;
-  }
+
   updateCartItem(updatedProduct: product) {
-    let currentCart = this.cartItems.getValue();
-    const index = currentCart.findIndex(item => item.id === updatedProduct.id);
+    let currentCart = this.cartItems.getValue();//initialising the current cart to get whats already inthe cart
+    const index = currentCart.findIndex(item => item.id === updatedProduct.id);//getting the id of the products
     if (index !== -1) {
-      currentCart[index].quantity = updatedProduct.quantity;
+      currentCart[index].quantity = updatedProduct.quantity;//updates the quantity
       this.cartItems.next(currentCart);
     }
   }
@@ -125,34 +92,19 @@ export class ApiService {
   caltotal():number{
     return this.cartItems.getValue()
         .reduce((total, item) => total + (item.price * (item.quantity || 0)), 0);
-    // let total=0;
-    // this.cartitemList.map((a:any)=>{
-    //   total=total+a.price
-    // })
-    // return total;
   }
-  removeall(){
+//The .reduce() method will work as follows:
+//when we use .reduce it take the initial value as 0 so its passing 0as total and then the item
+// Initial value: 0
+// First iteration: total = 0 + (10 * 2) = 20
+// Second iteration: total = 20 + (20 * 1) = 40
+// Third iteration: total = 40 + (5 * 4) = 60
+// So, the final result returned by .reduce() is 60, which is the total cost of all items in the cart.
+  
+
+removeall(){//this is called when we need delete all the items from cart 
     console.log("cartitemlist-1",this.cartItems)
-    this.cartItems.next([]);
+    this.cartItems.next([]); //emtying the cartitem array
     console.log("cartitemlist-2",this.cartItems)    
   }
-  //
-  // createOrder(product: product) {
-  //   const payload = {
-  //     productName: product.title,
-  //     amount: product.price,
-  //   };
-  //   return this.http.post(`${this.baseUrl}/api/createPaymentOrder`, {
-  //     payload,
-  //   });
-  // }
-  // //
-  // getSelectedProductForCheckout(){
-  //   return this.selectedProductForCheckout;
-  // }
-  // //
-  // setSelectedProductForCheckout(item:product){
-  //   this.selectedProductForCheckout=item
-  // }
-
 }

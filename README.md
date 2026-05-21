@@ -1,28 +1,55 @@
-# AmazonClone
+# Amazon Clone
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
+E-commerce UI built with **Angular 16** (migrated from Angular 9). Runs on **Node.js 18+** (tested with Node 18.10.0).
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Node.js 18 or 20
+- npm 8+
+- MySQL 8 (local)
 
-## Code scaffolding
+## Install (frontend)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm install
+```
 
-## Build
+## Backend API (`server/`)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```bash
+cd server
+npm install
+```
 
-## Running unit tests
+Edit `server/.env` if your MySQL user/password differ (default: `root`, empty password, database `amazon_clone`).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+npm run db:init
+npm start
+```
 
-## Running end-to-end tests
+API: `http://localhost:5000` — see [server/README.md](server/README.md) for auth endpoints.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Development server (frontend)
 
-## Further help
+```bash
+npm start
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-# Amazon-clone
+Open [http://localhost:4200/](http://localhost:4200/).
+
+Use the project CLI (`npm start` / `npx ng serve`), not a globally installed Angular 9 CLI.
+
+## Production build (for hosting)
+
+```bash
+npm run build
+```
+
+Output is in `dist/amazon-clone/`. Deploy that folder to static hosting (Netlify, Vercel, Azure Static Web Apps, S3, etc.).
+
+## Tests
+
+```bash
+npm test
+```

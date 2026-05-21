@@ -32,6 +32,7 @@ export class CategoryComponent implements OnInit {
       console.log(this.productdetails, "finall")
     }
     )
+    window.scrollTo(0,0);
   }
   prevslide(){}
   nextslide(){}

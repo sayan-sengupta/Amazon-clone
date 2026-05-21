@@ -1,11 +1,16 @@
+<app-header></app-header>
+
 <div class="row search-item" *ngFor="let item of searchresult.products">
-    <div class="col-sm-3">
-        <img src="{{item.thumbnail}}" alt="">
-    </div>
-    <div class="col-sm-8 details" >
-        <h6>{{item.title}}</h6>
-        <p><b>price $ {{item.price}}</b></p>
-        <p><span>Category {{item.category}}</span></p>
-        <p>{{item.description}}</p>
+    <div routerLink="/product-detail/{{item.id}}" class="row" style="cursor: pointer;">
+        <div class="col-sm-3">
+            <img src="{{item.thumbnail}}" alt="">
+        </div>
+        <div class="col-sm-8 details" >
+            <h6>{{item.title}}</h6>
+            <p><b>Price  <strike>₹{{item.price*83|number:'1.0-0'}}</strike></b>&nbsp;&nbsp;&nbsp;<strong>₹{{(item.price-(item.price*(item.discountPercentage/100)))*83|number:'1.0-0'}}</strong></p>
+            <p><span>Category {{item.category}}</span></p>
+            <p>{{item.description}}</p>
+        </div>
     </div>
 </div>
+<app-footer></app-footer>

@@ -1,39 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterComponent } from '../register/register.component';
-import { UserauthService } from 'src/app/shared/userauth.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent{
-  // loginObj:any={
-  //   email:'',
-  //   password:''
-  // };
-  // signupUsers: any[]=[];
-  constructor(private userauthservice:UserauthService ,private http:HttpClient) { }
-   // ngOnInit(): void {
-  //   const localData=localStorage.getItem('signUpUsers');
-  //   if(localData!=null){
-  //     this.signupUsers=JSON.parse(localData)
-  //   }
-  // }
-  // onLogIn(){
-  //   const isUserExist=this.signupUsers.find(m=>m.userName==this.loginObj.email&&m.password==this.loginObj.password);
-  //   if(isUserExist!=undefined){
-  //     alert('User loggged in success')
-  //   }
-  //   else{
-  //     alert('wrong email or password')
-  //   }
+export class LoginComponent implements OnInit{
+  loginObj:any={
+    email:'',
+    password:''
+  };
+  isloggedin = false;
+  constructor(private http:HttpClient,private router:Router) { }  
+  ngOnInit(): void {
+    // const token = localStorage.getItem('token');
+    // if (token) {
+    //   this.isloggedin = true;
+    //   this.router.navigate(['/home']); // Redirect to home if already logged in
+    // }
+  }
+  userLogin(){
 
-  // }
-  userLogin(data:any){
-    console.log(data);
-    this.userauthservice.login(data);
+    
+    if(this.loginObj.email && this.loginObj.password){
+    this.http.post<any>('http://localhost:5000/login', this.loginObj).subscribe({
+      next: (response) => {
+        localStorage.setItem('token', response.token);  // Store the token
+        console.log("token",response.token)//rpinting the token in console
+        localStorage.setItem('email', response.email);  // Store the token
+        console.log("email",response.email)
+        this.isloggedin=true;
+        this.router.navigate(['/home']);  // Navigate to the home page on login
+      },
+      error: (err) => {
+        if(err){
+        alert('Invalid Credentials');
+        this.isloggedin=false;
+      }
+
     }
+    }); 
+  }
+  else{
+    alert('Please fill both the fields')
+  }
 
+}
 }

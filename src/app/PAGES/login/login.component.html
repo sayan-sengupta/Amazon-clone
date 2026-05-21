@@ -14,7 +14,7 @@
   <div class="d-flex flex-row justify-content-center">
     <div class="row">
       <div class="col-md">
-        <form #login="ngForm" (ngSubmit)="userLogin(login.value)">
+        <form (ngSubmit)="userLogin()" #loginForm="ngForm">
           <div class="sign-in">Log in</div>
           <div class="form-group">
             <label id="words_1" for="exampleInputEmail1"
@@ -27,9 +27,14 @@
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter email"
-              ngModel
+              [(ngModel)]="loginObj.email"
               name="email"
+              #email="ngModel"
             />
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+              <div *ngIf="email.errors?.required">Email is required.</div>
+              <div *ngIf="email.errors?.email">Please enter a valid email.</div>
+            </div>
             <small id="emailHelp" class="form-text text-muted"></small>
           </div>
           <div class="form-group">
@@ -42,20 +47,20 @@
               id="exampleInputPassword1"
               placeholder="Password"
               required
-              ngModel
+              [(ngModel)]="loginObj.password"
               name="pass"
+              #pass="ngModel"
+              
             />
+            <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="text-danger">
+              <div *ngIf="pass.errors?.required">Password is required.</div>
+            </div>
 
             <div class="form-group">
-              <button type="submit" class="btn btn-warning" id="sign-in" >Sign in</button>
-              <input
-                type="checkbox"
-                class="form-check-input checkbox"
-                id="exampleCheck1"
-              />
-              <p class="keep-sign-in">
-                Keep me signed in. <a href="https://stupidlink.com">Details</a>
-              </p>
+              <button type="submit" class="btn btn-warning" id="sign-in" [disabled]="loginForm.invalid">Sign in</button>
+              
+            </div>
+            <div>
               <img
                 id="amazon-img"
                 src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
@@ -73,12 +78,11 @@
             Create your Amazon account
           </button>
 
-          <!-- <div
+          <div
             id="g_id_onload"
-            data-client_id="23003612651-2rovdmm61tie92qgnio5hm5v8ir6ctng.apps.googleusercontent.com"
+            data-client_id="23003612651-i3j86u97f4b0db13h8u5ttgffb453an6.apps.googleusercontent.com"
             data-context="signin"
             data-ux_mode="popup"
-            data-login_uri="http://localhost:5000/api/login"
             data-auto_select="true"
             data-itp_support="true"
           ></div>
@@ -90,8 +94,8 @@
             data-theme="filled_blue"
             data-text="signin_with"
             data-size="large"
-            data-logo_alignment="left"
-          ></div> -->
+            data-logo_alignment="center"
+          ></div>
         </form>
       </div>
     </div>

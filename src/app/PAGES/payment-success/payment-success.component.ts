@@ -12,6 +12,7 @@ export class PaymentSuccessComponent implements OnInit {
 
   ngOnInit(): void {
     this.emptycart();
+    window.scrollTo(0,0);
   }
   emptycart(){
     this.api.removeall();

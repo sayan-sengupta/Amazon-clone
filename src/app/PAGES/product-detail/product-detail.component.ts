@@ -16,6 +16,9 @@ export class ProductDetailComponent implements OnInit {
   showadd:boolean=true;
   showremove:boolean=false;
   price:any;
+  searchRes:any=[];
+ showsuggestions;
+
 
   
   constructor(private api:ApiService, private activatedroute:ActivatedRoute, private ngzone:NgZone,private router:Router) { }
@@ -35,6 +38,35 @@ export class ProductDetailComponent implements OnInit {
     window.scrollTo(0,0);
   }
   
+  searchproduct(query:KeyboardEvent){
+    if(query){
+      const el=query.target as HTMLInputElement;
+      const val=el.value.trim();
+      if(val){
+      this.api.searchproducts(el.value).subscribe((res)=>{
+        console.log(res);//display based on what we typed
+        // res.length=5; not working this is for limiting search
+        this.searchRes=res["products"];
+        console.log("sesrchres",this.searchRes)
+        this.showsuggestions=true;
+      
+      });
+    }
+    else{
+      this.searchRes=[];
+      console.log("this.searchRes",this.searchRes)
+      this.showsuggestions=false;
+    }
+    }
+     
+    
+  
+
+  }
+  submitsearch(value:string){
+    // console.log(value)
+    this.router.navigate([`search/${value}`])
+  }
 
   addtocart(productdata:product){
     this.showadd=false;
