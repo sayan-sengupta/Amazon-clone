@@ -3,6 +3,7 @@ import { product } from '../home/productmodal';
 import { ApiService } from 'src/app/shared/api.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class CategoryComponent implements OnInit {
   data: any;
   productdetails;
-  product:void;
+  categorySlug: string = '';   // ✅ not "product: void"
   getprod:any;
   cart: { [key: string]: number } = {};
   constructor(private api:ApiService,private route:Router,private http:HttpClient) { }
@@ -20,18 +21,15 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     // this.displayproducts();
     // this.popularproducts();
-    this.product = this.api.productCategory;
+    this.categorySlug = this.api.productCategory;
  
-    console.log(this.product, "productdetails")
-    this.http.get("https://dummyjson.com/products/category/" + this.product).subscribe((data) => {
-      console.log("data", data);
- 
-      // this.subcategory = data['products'][0].category
-      // console.log("subcat", this.subcategory)
-      this.productdetails = data['products']
-      console.log(this.productdetails, "finall")
-    }
-    )
+    console.log(this.categorySlug, "productdetails")
+    this.api.getProductsByCategory(this.categorySlug).subscribe({
+      next: (data) => {
+        this.productdetails = data.products;
+      },
+      error: (err) => console.error(err),
+});
     window.scrollTo(0,0);
   }
   prevslide(){}

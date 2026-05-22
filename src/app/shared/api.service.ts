@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { product } from '../PAGES/home/productmodal';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ApiService {
   constructor(private http:HttpClient) { }
 
   getproduct(){
-    return this.http.get<product[]>("https://dummyjson.com/products?limit=50")
+    return this.http.get<{products: product[];total:number;limit:number}>(`${environment.apiUrl}/api/products?limit=50`)
   }
 
   // popularproduct(){
@@ -27,13 +28,18 @@ export class ApiService {
   // }
 
   getproductbyid(id:string){
-    return this.http.get("https://dummyjson.com/products/"+id)
+    return this.http.get(`${environment.apiUrl}/api/products/${id}`)
   }
 
   searchproducts(query:string){
-    return this.http.get(`https://dummyjson.com/products/search?q=${query}`);
+    return this.http.get(`${environment.apiUrl}/api/products/search?q=${query}`);
 
   }
+  getProductsByCategory(slug: string) {
+  return this.http.get<{ products: product[] }>(
+    `${environment.apiUrl}/api/products/category/${slug}`
+  );
+}
 
 
   addtocart(data:product){
